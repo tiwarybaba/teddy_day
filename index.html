@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Teddy Day</title>
+    <style>
+        body {
+            background-color: #ffc0cb;
+            background-image: url('https://twemoji.maxcdn.com/v/latest/72x72/1f380.png');
+            background-size: 50px;
+            background-repeat: repeat;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        h1 {
+            color: #d63384;
+            font-size: 32px;
+            margin-top: 50px;
+        }
+        button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            margin: 20px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .teddy {
+            position: absolute;
+            font-size: 50px;
+            top: -50px;
+            animation: fall 3s linear infinite;
+        }
+        @keyframes fall {
+            0% { top: -50px; }
+            100% { top: 100vh; }
+        }
+        .big-bow {
+            font-size: 200px;
+            display: block;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Teddy Day, My Teddy 🐻, I Love You 💕</h1>
+    <button onclick="startTeddyEffect(80)">Bada Teddy</button>
+    <button onclick="startTeddyEffect(40)">Chota Teddy</button>
+    <div class="big-bow">🎀</div>
+    <audio id="background-music" loop>
+        <source src="honeypie.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        function startTeddyEffect(size) {
+            dropTeddy(size);
+            
+            let audio = document.getElementById("background-music");
+            audio.play().catch(error => {
+                console.log("Autoplay prevented, user interaction required: ", error);
+            });
+        }
+
+        function dropTeddy(size) {
+            let teddy = document.createElement("div");
+            teddy.classList.add("teddy");
+            teddy.style.left = Math.random() * window.innerWidth + "px";
+            teddy.style.fontSize = size + "px";
+            teddy.innerHTML = "🐻";
+            document.body.appendChild(teddy);
+            
+            setTimeout(() => {
+                teddy.remove();
+            }, 3000);
+        }
+
+        document.getElementById("background-music").addEventListener("ended", function() {
+            this.play();
+        });
+    </script>
+</body>
+</html>
